@@ -1,6 +1,15 @@
 {
+  "name": "commonfiles",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "keywords": [],
+  "author": "strevana",
+  "license": "ISC",
+
   "dependencies": {
-    "express": "^4.18.2",
-    "mongoose": "^7.5.3"
-  }
+      "express": "^4.18.2",
+      "mongoose": "^7.5.3"
+    }
+
 }

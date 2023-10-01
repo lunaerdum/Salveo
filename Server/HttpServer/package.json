@@ -1,9 +1,0 @@
-{
-  "name": "httpserver",
-  "version": "1.0.0",
-  "description": "",
-  "main": "server.js",
-  "keywords": [],
-  "author": "strevana",
-  "license": "ISC"
-}
