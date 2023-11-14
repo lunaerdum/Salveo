@@ -25,8 +25,10 @@ body {
     border: 1px solid rgba(255, 255, 255, .18);
     border-radius: 20px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin: auto;
 }
 
 .logo {

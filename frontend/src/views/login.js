@@ -2,6 +2,7 @@ import React from 'react';
 import EmailIcon from '@mui/icons-material/Email';
 import LockIcon from '@mui/icons-material/Lock';
 import './style.css';
+import { NavLink } from 'react-router-dom';
 
 const Login = () => {
   return (
@@ -37,7 +38,7 @@ const Login = () => {
           <button type="submit">Login</button>
           <div className="register-link">
             <p>
-              Don't have an account? <a href="#">Register</a>
+              Don't have an account? <NavLink to="/Register">Register</NavLink>
             </p>
           </div>
         </form>
