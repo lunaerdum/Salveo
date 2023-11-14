@@ -17,14 +17,14 @@ const Login = () => {
           </div>
           <div className="input-box">
             <span className="icon">
-             <EmailIcon />
+              <EmailIcon />
             </span>
             <input type="email" />
             <label>Email</label>
           </div>
           <div className="input-box">
             <span className="icon">
-             <LockIcon />
+              <LockIcon />
             </span>
             <input type="password" />
             <label>Password</label>
@@ -36,6 +36,16 @@ const Login = () => {
             <a href="#">Forgot Password?</a>
           </div>
           <button type="submit">Login</button>
+          <div className="social-media">
+            <div className="loginButton facebook">
+              <img src="facebook.png" alt="facebook" className="icon" />
+              Facebook
+            </div>
+            <div className="loginButton google">
+              <img src="google.png" alt="google" className="icon" />
+              Google
+            </div>
+          </div>
           <div className="register-link">
             <p>
               Don't have an account? <NavLink to="/Register">Register</NavLink>
