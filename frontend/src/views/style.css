@@ -7,6 +7,7 @@
     font-family: 'Poppins', sans-serif;
 }
 
+
 body {
     display: flex;
     justify-content: center;
@@ -19,7 +20,7 @@ body {
 .wrapper {
     position: relative;
     width: 500px;
-    height: 600px;
+    height: 620px;
     background: rgba(255, 255, 255, .15);
     box-shadow: 0 8px 32px rgba(31, 38, 135, .37);
     border: 1px solid rgba(255, 255, 255, .18);
@@ -86,6 +87,10 @@ h2 {
     line-height: 57px;
 }
 
+.input-field::placeholder {
+    color: white;
+  }
+
 .remember-forgot {
     margin: -15px 0 15px;
     font-size: .9em;
@@ -104,6 +109,29 @@ h2 {
 }
 
 .remember-forgot label input {
+    accent-color: #4ecdca;
+    margin-right: 3px;
+}
+
+.term {
+    margin: -15px 0 10px;
+    font-size: .9em;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2px;
+}
+
+.term a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.term a:hover {
+    text-decoration: underline;
+}
+
+.term label input {
     accent-color: #4ecdca;
     margin-right: 3px;
 }
@@ -145,11 +173,11 @@ button {
 }
 
 .google {
-    background-color: #df4930;
+    background-color: #e12e2f;
 }
 
 .facebook {
-    background-color: #507cc0;
+    background-color: #3b5899;
 }
 
 .icon {
