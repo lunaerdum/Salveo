@@ -2,11 +2,11 @@ import asyncHandler from 'express-async-handler';
 import User from '../models/userModel.js'
 import generateToken from '../utils/generateToken.js'
 
-// @desc Auth user | Set token
-// route POST /api/users/auth
+// @desc Login user | Set token
+// route POST /login
 // @access Public
 
-const authUser = asyncHandler(async (req, res) => {
+const loginUser = asyncHandler(async (req, res) => {
     const { email, password } = req.body;
 
     const user = await User.findOne({ email });
@@ -26,24 +26,44 @@ const authUser = asyncHandler(async (req, res) => {
 });
 
 // @desc Register a new user
-// route POST /api/users
+// route POST /register
 // @access Public
 
 const registerUser = asyncHandler(async (req, res) => {
-    const { username, email, password } = req.body;
+    const { username, email, password, cpassword } = req.body;
 
-    const userExists = await User.findOne({ email })
-
-    if (userExists) {
-        res.status(400);
-        throw new Error('User already exists');
+    if (!username || !email || !password || !cpassword) {
+        res.status(422).json({ error: "Fill all the details!" })
     }
 
-    const user = await User.create({
-        username,
-        email,
-        password,
-    });
+    try {
+
+        const userExists = await User.findOne({ email: email });
+
+        if (userExists) {
+            res.status(422);
+            throw new Error('User already exists');
+        }
+        else if (password !== cpassword) {
+            res.status(422).json({ error: "Password and Confirm Password aren't matching!" })
+        }
+        else {
+            const finalUser = new User({
+                username,
+                email,
+                password,
+                cpassword,
+            });
+
+            const storeData = await finalUser.save();
+
+            console.log(storeData);
+        }
+    } catch (error) {
+        res.status(422).json(error);
+        console.log("ERROR!")
+
+    }
 
     if (user) {
         generateToken(res, user._id);
@@ -61,7 +81,7 @@ const registerUser = asyncHandler(async (req, res) => {
 });
 
 // @desc Logout user
-// route POST /api/users/logout
+// route POST /logout
 // @access Public
 
 const logoutUser = asyncHandler(async (req, res) => {
@@ -73,7 +93,7 @@ const logoutUser = asyncHandler(async (req, res) => {
 });
 
 // @desc Get user profile
-// route GET /api/users/logout
+// route GET /logout
 // @access Private
 
 const getUserProfile = asyncHandler(async (req, res) => {
@@ -108,7 +128,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
             username: updatedUser.username,
             email: updatedUser.email,
         });
-        
+
     } else {
         res.status(404);
         throw new Error('User not found');
@@ -117,7 +137,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 });
 
 export {
-    authUser,
+    loginUser,
     registerUser,
     logoutUser,
     getUserProfile,

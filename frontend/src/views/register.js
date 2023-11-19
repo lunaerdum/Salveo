@@ -26,7 +26,7 @@ const Register = () => {
     })
   };
 
-  const addUserdata = (e) => {
+  const addUserdata = async (e) => {
     e.preventDefault();
 
     const { username, email, password, cpassword } = inpval;
@@ -44,9 +44,21 @@ const Register = () => {
     } else if (password !== cpassword) {
       alert("Passwords aren't matching, please check!");
     } else {
-      console.log("User registration successfully done!");
+
+      const data = await fetch("/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          username, email, password, cpassword
+        })
+      });
+
+      const res = await data.json();
+      console.log(res);
     }
-  };
+  }
 
   return (
     <>
