@@ -28,15 +28,7 @@ const userSchema = mongoose.Schema({
         type: String,
         required: true,
         minlength: 8
-    },
-    token: [
-        {
-            token: {
-                type: String,
-                required: true,
-            }
-        }
-    ]
+    }
 },
     {
         timestamps: true
@@ -56,11 +48,13 @@ userSchema.pre('save', async function (next) {
     }
 
     next();
+ 
 });
 
 userSchema.methods.matchPassword = async function (enteredPassword) {
     return await bcrypt.compare(enteredPassword, this.password) || await bcrypt.compare(enteredPassword, this.cpassword);
 };
+
 
 const User = mongoose.model("users", userSchema);
 

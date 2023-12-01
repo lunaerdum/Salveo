@@ -1,0 +1,196 @@
+@import url('https://fonts.cdnfonts.com/css/microsoft-yahei');
+
+body {
+    margin: 0;
+    overflow: hidden;
+}
+
+.app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin-bottom: 2vw;
+    background-color: #fdfffb;
+    font-family: 'Microsoft YaHei', sans-serif;
+}
+
+.index-header {
+    background-color: #E1E8DA;
+    color: #333;
+    padding: 0.5em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    margin-bottom: -200px;
+}
+
+.header-logo {
+    padding-left: 30px;
+    padding-bottom: 5px;
+    margin: 0 250px 0 250px;
+}
+
+.title-info{
+    font-size: 20px;
+    padding: 24px 0 24px 0;
+    font-weight: bold;
+    
+}
+
+hr {
+    margin: 0 auto; 
+    width: 75%; 
+    border: 1px solid #ccc; 
+    margin-bottom: 20px;
+}
+
+p {
+    margin-bottom: 30px;
+    padding-left: 30px;
+}
+
+.user-info {
+    cursor: pointer;
+    position: relative;
+    color: white;
+    min-height: auto;
+    max-width: 160px;
+    min-width: auto;
+    display: flex;
+    padding: 0 20px 0 20px;
+    margin: 0 250px 0 250px;
+    flex-wrap: wrap;
+}
+
+.logout-dropdown {
+    display: none;
+    position: absolute;
+    margin-top: 44px;
+    background-color: #fff;
+    padding: 10px;
+    color: black;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    cursor: pointer;
+}
+
+.user-info:hover .logout-dropdown {
+    display: block;
+}
+
+.content {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    padding-left: 200px;
+    margin-right: 180px;
+}
+
+.sidebar {
+    width: 230px;
+    background-color: #ffffff;
+    padding: 10px 0 20px 30px;
+    border: 1px solid #E6E6E6;
+    margin: 10px;
+    align-items: center;
+}
+
+
+.sidebar ul {
+    list-style: none;
+}
+
+.sidebar-title {
+    color: #a6a6a6;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+.sidebar-link {
+    text-decoration: none;
+    color: black;
+    margin-left: 20px;
+    transition: color 0.3s ease;
+}
+
+.sidebar-link:hover,
+.sidebar-link:focus {
+    color: #E1E8DA;
+}
+
+.sidebar-link:hover::before,
+.sidebar-link:focus::before {
+    opacity: 1;
+}
+
+.sidebar li {
+    cursor: pointer;
+    padding-bottom: 20px;
+    position: relative;
+}
+
+.sidebar-link::before {
+    content: "";
+    display: block;
+    width: 4px;
+    height: 100%;
+    background-color: #E1E8DA;
+    position: absolute;
+    top: 0;
+    left: -8px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.sidebar-link:hover::before,
+.sidebar-link:focus::before {
+    opacity: 1;
+}
+
+.main-content {
+    width: 80%;
+    background-color: #ffffff;
+    padding: 0 0 8px 10px;
+    border: 1px solid #E6E6E6;
+    margin: 10px;
+    flex: 1;
+
+}
+
+.basic-info {
+    margin-top: 10px;
+    color: gray;
+  }
+
+.footer {
+    padding: 1rem;
+    background-color: #E1E8DA;
+    color: rgb(255, 255, 255);
+    text-align: center;
+}
+
+@media (max-width: 600px) {
+    .index-header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .header-logo,
+    .user-info {
+        margin: 0;
+        text-align: center; 
+    }
+
+    .user-info {
+        justify-content: center; 
+    }
+
+    .sidebar {
+        padding-left: 10px; 
+        margin: 0; 
+    }
+
+    .main-content {
+        padding: 0.5rem; 
+    }
+}

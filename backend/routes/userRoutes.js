@@ -1,14 +1,14 @@
 import express from 'express';
 const router = express.Router();
-import { 
+
+import {
     loginUser,
     registerUser,
     logoutUser,
     getUserProfile,
     updateUserProfile,
- } from '../controllers/userController.js';
- import { protect } from '../middleware/authMiddleware.js' ;
-
+} from '../controllers/userController.js';
+import { protect } from '../middleware/authMiddleware.js';
 
 
 /*router.post('/register', async (req,res)=>{

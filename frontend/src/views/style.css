@@ -1,19 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.cdnfonts.com/css/microsoft-yahei');
 
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Microsoft YaHei', sans-serif;
 }
 
 
-body {
+.auth {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: #c6ecec;
+    background: #E1E8DA;
     overflow: hidden;
 }
 
@@ -89,7 +88,7 @@ h2 {
 
 .input-field::placeholder {
     color: white;
-  }
+}
 
 .remember-forgot {
     margin: -15px 0 15px;
@@ -109,7 +108,7 @@ h2 {
 }
 
 .remember-forgot label input {
-    accent-color: #4ecdca;
+    accent-color: #AEC2AD;
     margin-right: 3px;
 }
 
@@ -132,14 +131,14 @@ h2 {
 }
 
 .term label input {
-    accent-color: #4ecdca;
+    accent-color: #AEC2AD;
     margin-right: 3px;
 }
 
 button {
     width: 100%;
     height: 45px;
-    background: #4ecdca;
+    background: #AEC2AD;
     border: none;
     outline: none;
     border-radius: 40px;
@@ -153,7 +152,7 @@ button {
 .social-media {
     display: flex;
     justify-content: space-between;
-  }
+}
 
 .loginButton {
     width: 150px;
@@ -207,22 +206,20 @@ button {
     position: absolute;
     width: 500px;
     height: 500px;
-    background: linear-gradient(180deg, rgba(47, 184, 255, 42) 31.77%, #7ad0d0 100%);
-    border-radius: 24% 76% 35% 35% / 27% 36% 64% 73%;
+    background: linear-gradient(180deg, rgba(148, 166, 132) 31.77%, #94a684 100%);
+    border-radius: 100% 0% 83% 17% / 100% 6% 94% 0% ;
     transform: translate(-100px, -50px) rotate(-90deg);
     transition: 1s cubic-bezier(.07, .8, .16, 1);
     animation: animateBlob 20s infinite alternate;
 }
 
 .blob:hover {
-    width: 520px;
-    height: 520px;
     filter: blur(30px);
     box-shadow:
         inset 0 0 0 5px rgba(255, 255, 255, .6),
-        inset 100px 100px 0 0 #bbe7ea,
-        inset 200px 200px 0 0 #80cfd2,
-        inset 300px 300px 0 0 #7ad0d0;
+        inset 100px 100px 0 0 #e1e8da,
+        inset 200px 200px 0 0 #c1c7ba,
+        inset 300px 300px 0 0 #94a684;
 }
 
 @keyframes animateBlob {

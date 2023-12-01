@@ -23,7 +23,7 @@ const Login = () => {
     })
   };
 
-  const loginUser = (e) => {
+  const loginUser = async (e) => {
     e.preventDefault();
 
     const { email, password } = inpval;
@@ -37,18 +37,32 @@ const Login = () => {
     } else if (password.length < 8) {
       alert("Passwords must be at least 8 characters in length!");
     } else {
-      console.log("User logged successfully done!");
+
+
+      const data = await fetch("/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          email, password
+        })
+      });
+
+      const res = await data.json();
+        console.log(res);
+
     }
-  };
+  }
 
   return (
-    <div>
+    <div className="auth">
       <div className="blob"></div>
       <div className="wrapper">
         <form action="">
           <div className="header">
             <div className="logo">
-              <img src="TYMLogoMini.png" alt="TYM Logo" />
+              <img src="SalveoLogoMini.png" alt="TYM Logo" />
             </div>
           </div>
           <div className="input-box">

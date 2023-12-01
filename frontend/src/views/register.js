@@ -56,19 +56,23 @@ const Register = () => {
       });
 
       const res = await data.json();
-      console.log(res);
+      console.log(res.status);
+
+      /*if(res.status === 201){
+        alert("User Registration Done!");
+        setInpval({...inpval,username:"",email:"",password:"",cpassword:""})
+      }*/
     }
   }
 
   return (
-    <>
-      <section>
+    <div className="auth">
         <div className="blob"></div>
         <div className="wrapper">
           <form action="">
             <div className="header">
               <div className="logo">
-                <img src="TYMLogoMini.png" alt="TYM Logo" />
+                <img src="SalveoLogoMini.png" alt="Salveo Logo" />
               </div>
             </div>
             <div className="input-box">
@@ -104,12 +108,11 @@ const Register = () => {
             <button className="button" onClick={addUserdata}>Register</button>
             <div className="register-link">
               <p>
-                Already have an account? <NavLink to="/">Login</NavLink></p>
+                Already have an account? <NavLink to="/login">Login</NavLink></p>
             </div>
           </form>
         </div>
-      </section>
-    </>
+      </div>
   );
 };
 
