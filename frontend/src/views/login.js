@@ -1,18 +1,17 @@
 import React, { useState } from 'react';
 import EmailIcon from '@mui/icons-material/Email';
 import LockIcon from '@mui/icons-material/Lock';
+import { NavLink, useNavigate } from 'react-router-dom'; 
 import './style.css';
-import { NavLink } from 'react-router-dom';
 
 const Login = () => {
-
+  const navigate = useNavigate(); 
   const [inpval, setInpval] = useState({
     email: "",
     password: "",
   });
 
   const setVal = (e) => {
-    //console.log(e.target.value);
     const { name, value } = e.target;
 
     setInpval(() => {
@@ -23,42 +22,64 @@ const Login = () => {
     })
   };
 
+  const [alertMessage, setAlertMessage] = useState(null);
+
+  const showAlert = (message) => {
+    setAlertMessage(message);
+    setTimeout(() => {
+      setAlertMessage(null);
+    }, 3000);
+  };
+
   const loginUser = async (e) => {
     e.preventDefault();
 
     const { email, password } = inpval;
 
     if (email === "") {
-      alert("Please enter your email!");
+      showAlert("Please enter your email!");
     } else if (!email.includes("@")) {
-      alert("Make sure to use a valid email!");
+      showAlert("Make sure to use a valid email!");
     } else if (password === "") {
-      alert("Please enter your password!");
-    } else if (password.length < 8) {
-      alert("Passwords must be at least 8 characters in length!");
+      showAlert("Please enter your password!");
     } else {
+      try {
+        const data = await fetch("/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            email, password
+          })
+        });
 
-
-      const data = await fetch("/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          email, password
-        })
-      });
-
-      const res = await data.json();
-        console.log(res);
-
+        const res = await data.json();
+        if (res.success) {
+          navigate('/index')
+        } else {
+          if (res.error === "Invalid email or password") {
+            showAlert("Invalid email or password. Please check your credentials.");
+          } else {
+            showAlert("Login failed. Please try again.");
+          }
+        }
+      } catch (error) {
+        console.error("Login Error:", error);
+        showAlert("Oops! Something went wrong. Please try again later.");
+      }
     }
-  }
+  };
 
   return (
     <div className="auth">
       <div className="blob"></div>
       <div className="wrapper">
+        {alertMessage && (
+          <div className="custom-alert">
+            <p>{alertMessage}</p>
+          </div>
+        )}
         <form action="">
           <div className="header">
             <div className="logo">
@@ -79,7 +100,7 @@ const Login = () => {
           </div>
           <div className="remember-forgot">
             <label>
-              <input type="checkbox" /> Remember me
+              <input type="checkbox" />Remember me
             </label>
             <a href="#">Forgot Password?</a>
           </div>

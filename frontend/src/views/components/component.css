@@ -51,7 +51,6 @@ p {
 }
 
 .user-info {
-    cursor: pointer;
     position: relative;
     color: white;
     min-height: auto;
@@ -66,7 +65,9 @@ p {
 .logout-dropdown {
     display: none;
     position: absolute;
-    margin-top: 44px;
+    top: 100%; 
+    left: 17%;
+    z-index: 1;
     background-color: #fff;
     padding: 10px;
     color: black;

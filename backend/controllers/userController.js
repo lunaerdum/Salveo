@@ -2,9 +2,6 @@ import asyncHandler from 'express-async-handler';
 import User from '../models/userModel.js';
 import generateToken from '../utils/generateToken.js';
 
-// @desc Login user 
-// route POST /login
-// @access Public
 const loginUser = asyncHandler(async (req, res) => {
     const { email, password } = req.body;
 
@@ -19,9 +16,13 @@ const loginUser = asyncHandler(async (req, res) => {
         if (userValid && (await userValid.matchPassword(password))) {
             generateToken(res, userValid._id);
             res.status(200).json({
-                _id: userValid._id,
-                username: userValid.username,
-                email: userValid.email
+                success: true,
+                message: 'Login successful',
+                user: {
+                    _id: userValid._id,
+                    username: userValid.username,
+                    email: userValid.email
+                }
             });
         } else {
             res.status(401).json({ error: "Invalid email or password" });
@@ -33,9 +34,6 @@ const loginUser = asyncHandler(async (req, res) => {
     }
 });
 
-// @desc Register a new user
-// route POST /register
-// @access Public
 const registerUser = asyncHandler(async (req, res) => {
     const { username, email, password, cpassword } = req.body;
 
@@ -74,9 +72,6 @@ const registerUser = asyncHandler(async (req, res) => {
     }
 });
 
-// @desc Logout user
-// route POST /logout
-// @access Public
 const logoutUser = asyncHandler(async (req, res) => {
     res.cookie('jwt', '', {
         httpOnly: true,
@@ -85,9 +80,6 @@ const logoutUser = asyncHandler(async (req, res) => {
     res.status(200).json({ message: 'User logged out' });
 });
 
-// @desc Get user profile
-// route GET /profile
-// @access Private
 const getUserProfile = asyncHandler(async (req, res) => {
     const user = {
         _id: req.user._id,
@@ -97,9 +89,6 @@ const getUserProfile = asyncHandler(async (req, res) => {
     res.status(200).json(user);
 });
 
-// @desc Update user profile
-// route PUT /profile
-// @access Private
 const updateUserProfile = asyncHandler(async (req, res) => {
     try {
         const user = await User.findById(req.user._id);
