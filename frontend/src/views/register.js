@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import EmailIcon from '@mui/icons-material/Email';
 import LockIcon from '@mui/icons-material/Lock';
 import './style.css';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 const Register = () => {
+  const navigate = useNavigate();
   const [inpval, setInpval] = useState({
     username: "",
     email: "",
@@ -16,13 +17,10 @@ const Register = () => {
 
   const setVal = (e) => {
     const { name, value } = e.target;
-
-    setInpval(() => {
-      return {
-        ...inpval,
-        [name]: value
-      }
-    })
+    setInpval(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
   };
 
   const showAlert = (message) => {
@@ -35,40 +33,61 @@ const Register = () => {
   const addUserdata = async (e) => {
     e.preventDefault();
 
-    const { username, email, password, cpassword } = inpval;
+    try {
+      const { username, email, password, cpassword } = inpval;
 
-    if (username === "") {
-      showAlert("Please enter your username!");
-    } else if (email === "") {
-      showAlert("Please enter your email!");
-    } else if (!email.includes("@")) {
-      showAlert("Make sure to use a valid email!");
-    } else if (password === "") {
-      showAlert("Please enter your password!");
-    } else if (password.length < 8) {
-      showAlert("Passwords must be at least 8 characters in length!");
-    } else if (password !== cpassword) {
-      showAlert("Passwords aren't matching, please check!");
-    } else {
-      const data = await fetch("/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          username, email, password, cpassword
-        })
-      });
+      console.log("Submitting form...");
 
-      const res = await data.json();
+      if (username === "") {
+        showAlert("Please enter your username!");
+      } else if (email === "") {
+        showAlert("Please enter your email!");
+      } else if (!email.includes("@")) {
+        showAlert("Make sure to use a valid email!");
+      } else if (password === "") {
+        showAlert("Please enter your password!");
+      } else if (password.length < 8) {
+        showAlert("Passwords must be at least 8 characters in length!");
+      } else if (password !== cpassword) {
+        showAlert("Passwords aren't matching, please check!");
+      } else {
+        const data = await fetch("/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            username, email, password, cpassword
+          })
+        });
 
-  
-      if (res.status === 201) {
-        showAlert("User Registration Done!");
-        setInpval({ username: "", email: "", password: "", cpassword: "" });
+        if (!data.ok) {
+          const errorResponse = await data.json();
+          console.log("Registration failed:", errorResponse);
+          showAlert(`${errorResponse.error}`);
+        } else {
+          const res = await data.json();
+          console.log("Response:", res);
+
+          if (res._id) {
+            console.log("User Registration Done!");
+            showAlert("Welcome to Salveo!");
+            setTimeout(() => {
+              navigate('/login');
+            }, 3000);
+          } else {
+            console.log("Unexpected response:", res);
+          }
+        }
       }
+    } catch (error) {
+      console.error("Error in addUserdata:", error);
     }
-  }
+  };
+
+  useEffect(() => {
+    document.querySelector('.auth').classList.add('visible');
+  }, []);
 
   return (
     <div className="auth">

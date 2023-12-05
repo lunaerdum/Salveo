@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import EmailIcon from '@mui/icons-material/Email';
 import LockIcon from '@mui/icons-material/Lock';
 import { NavLink, useNavigate } from 'react-router-dom'; 
@@ -70,6 +70,10 @@ const Login = () => {
       }
     }
   };
+
+  useEffect(() => {
+    document.querySelector('.auth').classList.add('visible');
+  }, []);
 
   return (
     <div className="auth">
