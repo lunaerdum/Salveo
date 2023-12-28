@@ -33,7 +33,7 @@ Ensure you have the following prerequisites installed before setting up the Salv
 - MongoDB (version 6.x.x)
 
 ## API Documentation
-For details on available API endpoints and how to interact with them, refer to the API Documentation.
+For details on available API endpoints and how to interact with them, refer to the [API Documentation](https://docs.github.com/en/rest?apiVersion=2022-11-28).
 
 ## Contributing
 We welcome contributions! If you want to contribute to Salveo, please follow our Contribution Guidelines.
